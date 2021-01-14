@@ -255,3 +255,245 @@ cc_binary {
     "utils/afl_frida/android",
   ],
 }
+
+cc_defaults {
+  name: "afl-defaults-lto",
+
+  include_dirs: [
+    "prebuilts/clang/host/linux-x86/clang-r383902b/include",
+  ],
+
+  cflags: [
+    "-DLLVM_LTO=1",
+    "-DLLVM_MAJOR=11",
+    "-DLLVM_MINOR=2",
+    "-DAFL_CLANG_FUSELD=1",
+    "-DAFL_CLANG_LDPATH=1",
+  ],
+}
+
+/*cc_prebuilt_library_shared {
+  name: "libLLVM",
+
+  srcs: [
+    "../../../../../../prebuilts/clang/host/linux-x86/clang-r383902b/lib64/libLLVM-11git.so",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "afl-llvm-lto-instrumentlist",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/afl-llvm-lto-instrumentlist.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "afl-llvm-dict2file",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/afl-llvm-dict2file.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+
+  shared_libs: [
+    "libLLVM-11git",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "cmplog-routines-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/cmplog-routines-pass.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "cmplog-instructions-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/cmplog-instructions-pass.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "split-switches-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/split-switches-pass.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "compare-transform-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/compare-transform-pass.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "split-compares-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/split-compares-pass.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "libLLVMInsTrim",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/LLVMInsTrim.so.cc",
+    "instrumentation/MarkNodes.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "afl-llvm-pass",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/afl-llvm-pass.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "SanitizerCoveragePCGUARD",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/SanitizerCoveragePCGUARD.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+
+  shared_libs: [
+    "libLLVM_android",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "SanitizerCoverageLTO",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/SanitizerCoverageLTO.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+/*cc_library_shared {
+  name: "afl-llvm-lto-instrumentation",
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/afl-llvm-lto-instrumentation.so.cc",
+    "instrumentation/afl-llvm-common.cc",
+  ],
+}*/
+
+cc_library_static {
+  name: "afl-llvm-rt-lto",
+  compile_multilib: "both",
+  vendor_available: true,
+  host_supported: true,
+  recovery_available: true,
+  sdk_version: "9",
+
+  apex_available: [
+    "com.android.adbd",
+    "com.android.appsearch",
+    "com.android.art",
+    "com.android.bluetooth.updatable",
+    "com.android.cellbroadcast",
+    "com.android.conscrypt",
+    "com.android.extservices",
+    "com.android.cronet",
+    "com.android.neuralnetworks",
+    "com.android.media",
+    "com.android.media.swcodec",
+    "com.android.mediaprovider",
+    "com.android.permission",
+    "com.android.runtime",
+    "com.android.resolv",
+    "com.android.tethering",
+    "com.android.wifi",
+    "com.android.sdkext",
+    "com.android.os.statsd",
+    "//any",
+  ],
+
+  defaults: [
+    "afl-defaults",
+    "afl-defaults-lto",
+  ],
+
+  srcs: [
+    "instrumentation/afl-llvm-rt-lto.o.c",
+  ],
+}
